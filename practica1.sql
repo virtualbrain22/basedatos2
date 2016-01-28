@@ -75,3 +75,8 @@ CREATE TABLE SALA (ID_SALA INTEGER,
                    NUMSALA VARCHAR(3),
                    CONSTRAINT PK_ID_SALA PRIMARY KEY(SALA),
                    CONSTRAINT FK2_ID_PELICULA FOREIGN KEY (ID_PELICULA) REFERENCES PELICULA (ID_PELICULA));
+                   
+                   CREATE SEQUENCE sec_pelicula
+start with 1
+increment by 1
+nomaxvalue;
