@@ -148,3 +148,59 @@ END;
 /
 
 SELECT * FROM PELICULA;
+---------------------------------------------------------------------------------------
+6/02/16
+create table simple1 (id_simple integer,edad integer,nombre varchar2(40));
+--la llamamos con informacion rapida
+
+declare
+mi_edad integer;
+
+begin
+mi_edad:=20;
+-- el loop e llave cierre
+for i IN 1..20 LOOP 
+
+mi_edad:= mi_edad + i;
+insert into simple1 values (i,mi_edad,'juan carlos');
+end loop;
+end;
+/
+
+
+-- crear un cursor que busque el id que valga 21 y sustituir el nombre por el tu yo
+update simple1 set nombre ='xxx' where edad=21;
+set serveroutput on;
+
+DECLARE
+
+mi_nombre varchar(40) ;
+
+BEGIN
+
+SELECT nombre INTO mi_nombre 
+
+dbms_output.put_line(mi_nombre);
+end;
+/
+select * from simple1;
+
+delete from simple1;
+
+insert into simple1 values (1,21,'juan');
+
+insert into simple1 values (2,25,'pedro');
+
+insert into simple1 values (3,22,'pablo');
+
+insert into simple1 values (4,23,'paco');
+
+
+declare 
+mi_nombre varchar (40);
+begin
+
+select nombre into mi_nombre from simple1 where edad=21;
+dbms_output.put_line(mi_nombre);
+end;
+/
