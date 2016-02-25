@@ -278,3 +278,46 @@ END LOOP;
 END LOOP;
 END;
 /
+-----------------------------------------------
+examen practica 
+CREATE TABLE libros
+  (
+    libro_id           INTEGER,
+    isbn              VARCHAR2(13),
+    titulo            VARCHAR2(200),
+    resumen           VARCHAR2(2000),
+    autor             VARCHAR2(200),
+    fecha_publicacion DATE,
+    num_pag           NUMBER,
+    CONSTRAINT pk_libro_id PRIMARY KEY (libro_id));
+   
+                    CREATE SEQUENCE libros
+          
+ start with 1 
+ increment by 1 
+ nomaxvalue; 
+
+
+SET serveroutput ON;
+
+create or replace procedure guardarlibros(my_id out integer ,my_isbn in varchar2,my_titulo in varchar2,my_resumen in varchar2 ,my_autor in varchar2,dia in integer,mes in varchar2 ,año in integer ,my_num in number);
+
+DECLARE 
+my_fecha Date;
+
+
+
+BEGIN
+my_fecha:=to_date(''||dia||'-'||mes||'-'||anio);
+
+
+
+
+INSERT INTO libros values (valor_id, '1234','Abrupt climate change', 'Trata de que todos vamos a morir por contaminadores','John Wallace',27,'jan',2010,455);
+
+
+  
+
+END LOOP;
+end;
+/
