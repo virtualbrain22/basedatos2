@@ -363,3 +363,63 @@ UPDATE nomina_xxx SET
 SALDO= -800 WHERE ID_NOMINAXXX=1;
 
 SELECT * FROM NOMINA_XXX;
+---------------------------------------------
+--despues del examen
+--5/03/16
+-- generar la siguientes tabla 
+
+create table resgistro (id_reg integer,
+                         nombre varchar2(40),
+                         email varchar2(40),
+                         edad integer,
+                         constraint pk_id_reg primary key (id_reg) );
+
+
+create table resgistro_mayores (id_regmayor integer,
+                                  nombre varchar2(40),
+                                  email varchar2(40),
+                                  edad integer,
+                                  constraint pk_id_regmayor primary key (id_regmayor));
+
+
+create table resgistro_menores (id_regmenor integer,
+                                 nombre varchar2(40),
+                                 email varchar2(40),
+                                 edad integer,
+                                 constraint pk_id_regmenor primary key (id_regmenor));
+                                 
+                                 
+--crear disparador que tenga la siguiente logica 
+--A)AL IUNSERTAR UN REGISTRO  EN LA TABLA 1, CHECAR SI LA EDAD ES  MENOR 18, SI ES ASI INSERTAR EL REGISTRO EN LA TABLA 1 Y 2
+--B)AL INSERTAR UN REGISTRO EN LA TABLA 1, CHECAR SI LA EDAD ES MENOR DE 18, SI ES ASI INSERTAR EL REGISTRO EN LA TABLA 1 Y 3.
+
+CREATE OR REPLACE TRIGGER RESPALDO_REGISTRO AFTER INSERT ON RESGISTRO
+FOR EACH ROW
+
+BEGIN
+
+IF :NEW.EDAD<0 THEN 
+IF:NEW.EDAD >= 18  THEN
+
+DBMS.OUTPUT.PUT_LINE  ('ERROR');
+ 
+
+INSERT INTO RESGISTRO_MAYORES VALUES(:NEW.ID_REG,:NEW.NOMBRE,:NEW.EMAIL,:NEW.EDAD);
+
+ELSE
+
+INSERT INTO RESGISTRO_MENORES VALUES(:NEW.ID_REG,:NEW.NOMBRE,:NEW.EMAIL,:NEW.EDAD);
+
+
+
+
+END IF;
+END IF;
+END ;
+/
+
+INSERT INTO resgistro  VALUES (5,'MAX','ENANO.223@HOTMAIL.COM',-40);
+
+SELECT * FROM RESGISTRO_MENORES;
+
+SELECT * FROM RESGISTRO_MAYORES;
